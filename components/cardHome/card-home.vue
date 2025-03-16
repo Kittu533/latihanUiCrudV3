@@ -1,14 +1,18 @@
 <!-- components/CardHome.vue -->
-<template> 
-  <div class="flex flex-col items-center flex-wrap">
-    <div class="flex flex-col justify-center items-center px-12 p-4 rounded-lg">
-      <div class="text-blue-500 bg-blue-200 p-8 rounded-xl mb-4">
-        <BaseIcon :name="icon" />
-      </div>
-      <h3 class="font-semibold text-[20px] text-center mb-2">{{ title }}</h3>
-      <p class="text-[14px] text-gray-500 text-center">
-        {{ description }}
-      </p>
+<template>
+  <div
+    :class="
+      horizontal
+        ? 'flex items-start space-x-4'
+        : 'flex flex-col items-center flex-wrap'
+    "
+  >
+    <div :class="iconContainerClass">
+      <BaseIcon :name="icon" />
+    </div>
+    <div :class="textContainerClass">
+      <h3 class="font-semibold text-[18px] mb-1">{{ title }}</h3>
+      <p class="text-sm text-gray-500">{{ description }}</p>
     </div>
   </div>
 </template>
@@ -16,9 +20,20 @@
 <script setup lang="ts">
 import BaseIcon from "../base-icon.vue";
 
-defineProps<{
+const props = defineProps<{
   icon: string;
   title: string;
   description: string;
+  horizontal?: boolean;
 }>();
+
+const iconContainerClass = computed(() =>
+  props.horizontal
+    ? "bg-blue-100 text-blue-600 p-4 rounded-xl"
+    : "text-blue-500 bg-blue-200 p-8 rounded-xl mb-4"
+);
+
+const textContainerClass = computed(() =>
+  props.horizontal ? "flex flex-col justify-center" : "text-center"
+);
 </script>
