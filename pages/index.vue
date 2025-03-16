@@ -127,7 +127,7 @@
           <div class="flex justify-center">
             <img
               class="-scale-x-100 max-w-full"
-              src="../public/car-home.webp"
+              src="../public/car.png"
               alt="Car"
             />
           </div>
