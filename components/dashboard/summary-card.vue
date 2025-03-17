@@ -16,7 +16,7 @@
         </p>
       </div>
       <div class="rounded-full p-2" :class="bgColor">
-        <component :is="icons[icon as keyof typeof icons] || icons.HomeIcon" />
+        <component :is="icon" class="h-5 w-5 text-white"/>
 
       </div>
     </div>
@@ -31,10 +31,9 @@ const props = defineProps<{
   value: string;
   trend?: 'up' | 'down';
   percentage?: string | number;
-  icon?: 'HomeIcon' | 'UsersIcon' | 'WheelchairIcon' | 'ClipboardIcon';
+  icon?: string;
   bgColor?: string;
 }>()
-
 
 
 const resolveIcon = (iconName: string) => {

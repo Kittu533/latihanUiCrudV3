@@ -46,26 +46,27 @@
             class="text-sm text-gray-700 dark:text-gray-300"
           >
             <td v-for="column in columns" :key="column" class="px-4 py-3">
-              <div v-if="column === 'Status'">
+              <div v-if="column === 'status'">
                 <StatusBadge :status="item.status ?? ''" />
               </div>
               <div v-else>
-                {{ item[column.toLowerCase()] || item[column] }}
+                {{ item[column] }}
               </div>
             </td>
+
             <td class="px-4 py-3">
               <div class="flex items-center gap-2">
                 <button
                   @click="$emit('edit', item)"
                   class="rounded-md bg-gray-100 p-1.5 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
                 >
-                  <EditIcon class="h-4 w-4" />
+                  <Edit class="h-5 w-5 text-gray-500" />
                 </button>
                 <button
                   @click="$emit('delete', item)"
                   class="rounded-md bg-gray-100 p-1.5 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
                 >
-                  <TrashIcon class="h-4 w-4" />
+                  <Trash class="h-5 w-5 text-gray-500" />
                 </button>
               </div>
             </td>
@@ -100,28 +101,31 @@
 </template>
 
 <script setup lang="ts">
-import { SearchIcon, EditIcon, TrashIcon } from "../icon";
+import { Edit, Trash } from "lucide-vue-next";
 import StatusBadge from "../dashboard/status-badge.vue";
 
-interface Column {
-  name: string;
-}
-
 interface DataItem {
-  [key: string]: any;
+  [key: string]: string | number | boolean | undefined;
   status?: string;
 }
 
+// Define props dengan penggunaan eksplisit
 const props = defineProps<{
   title: string;
   itemName: string;
-  columns: string[]; // <--- diubah jadi string[]
+  columns: string[]; // Sudah benar diubah jadi string[]
   data: DataItem[];
 }>();
 
-const emit = defineEmits<{
-  (e: "add"): void;
-  (e: "edit", item: DataItem): void;
-  (e: "delete", item: DataItem): void;
-}>();
+// Untuk sementara, supaya tidak muncul warning unused props:
+console.log(props.title, props.itemName, props.columns, props.data);
+
+// const emit = defineEmits<{
+//   (e: "add"): void;
+//   (e: "edit", item: DataItem): void;
+//   (e: "delete", item: DataItem): void;
+// }>();
+
+// // Untuk sementara juga agar tidak warning unused emit:
+// console.log(emit);
 </script>

@@ -39,7 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from "vue";
+import { inject } from "vue";
+import type { Ref } from 'vue';
 import SidebarNavItem from "./sidebar-navitem.vue";
 import { SunIcon, MoonIcon, LogOutIcon } from "../components/icon/index";
 

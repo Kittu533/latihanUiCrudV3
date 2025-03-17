@@ -5,7 +5,7 @@
       <DataTable
         title="Wheelchairs Inventory"
         item-name="Wheelchair"
-        :columns="['ID', 'Model', 'Type', 'Status', 'Condition', 'Location']"
+        :columns="['id', 'model', 'type', 'status', 'condition', 'location']"
         :data="wheelchairs"
         @add="openAddModal"
         @edit="openEditModal"

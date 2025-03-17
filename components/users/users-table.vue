@@ -5,7 +5,7 @@
     <DataTable
       title="Users List"
       item-name="User"
-      :columns="['ID', 'Name', 'Email', 'Role', 'Status', 'Last Login']"
+      :columns="['id', 'name', 'email', 'role', 'status', 'lastLogin']"
       :data="users"
       @add="openAddModal"
       @edit="openEditModal"
@@ -24,7 +24,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import DataTable from '../dashboard/data-table.vue';
 import FormModal from '../dashboard/form-modal.vue';
 import { useToast } from '../../composables/use-toast';
@@ -71,13 +70,26 @@ const openAddModal = () => {
   formData.value = {};
   isModalOpen.value = true;
 };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type DataItem = Record<string, any>;
 
-const openEditModal = (user: User) => {
+
+const openEditModal = (item: DataItem) => {
+  const user = item as User;
   editingUser.value = user;
   formData.value = { ...user };
   isModalOpen.value = true;
 };
+const deleteUser = (item: DataItem) => {
+  const user = item as User;
+  users.value = users.value.filter(u => u.id !== user.id);
 
+  showToast({
+    type: 'success',
+    title: 'User Deleted',
+    message: 'User has been deleted successfully.',
+  });
+};
 const saveUser = (data: FormData) => {
   if (editingUser.value) {
     // Update existing user
@@ -99,13 +111,4 @@ const saveUser = (data: FormData) => {
   });
 };
 
-const deleteUser = (user: User) => {
-  users.value = users.value.filter(u => u.id !== user.id);
-
-  showToast({
-    type: 'success',
-    title: 'User Deleted',
-    message: 'User has been deleted successfully.',
-  });
-};
 </script>

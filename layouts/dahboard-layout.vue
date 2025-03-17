@@ -29,7 +29,7 @@
   </template>
   
   <script setup lang="ts">
-  import { ref } from "vue";
+  
   import AppSidebar from "../layouts/app-sidebar.vue";
   import AppHeader from "../layouts/app-header.vue";
   import ToastNotification from "../components/dashboard/toast-notification.vue";

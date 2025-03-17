@@ -6,15 +6,20 @@
   </div>
 </template>
 
-<script setup>
-import { ref, provide, computed } from "vue";
-import DashboardLayout from "../components/layout/DashboardLayout.vue";
-import DashboardOverview from "../components/dashboard/DashboardOverview.vue";
-import UsersTable from "../components/users/UsersTable.vue";
-import WheelchairsTable from "../components/wheelchairs/WheelchairsTable.vue";
-import RentalsTable from "../components/rentals/RentalsTable.vue";
-import { provideToast } from "../composables/useToast";
+<script setup lang="ts">
+import { provide, computed } from "vue";
+import DashboardLayout from "../../layouts/dahboard-layout.vue";
+import DashboardOverview from "../../components/dashboard/dashboard-overview.vue";
+import UsersTable from "../../components/users/users-table.vue";
+import WheelchairsTable from "../../components/wheelchairs/wheelchairs-table.vue";
+import RentalsTable from "../../components/rentals/rentals-table.vue";
+import { provideToast } from "../../composables/use-toast";
 
+
+definePageMeta({
+  layout: false,
+  title: "Admin Dashboard",
+});
 // Provide toast functionality
 provideToast();
 
@@ -24,9 +29,10 @@ const isDarkMode = ref(false);
 // Active section state
 const activeSection = ref("dashboard");
 provide("activeSection", activeSection);
-provide("setActiveSection", (section) => {
+provide("setActiveSection", (section: string) => {
   activeSection.value = section;
 });
+
 
 // Determine which component to render based on active section
 const currentComponent = computed(() => {

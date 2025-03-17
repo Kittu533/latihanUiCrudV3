@@ -21,12 +21,12 @@
       title="Recent Activities"
       item-name="Activity"
       :columns="[
-        'ID',
-        'User',
-        'Wheelchair',
-        'Start Date',
-        'End Date',
-        'Status',
+        'id',
+        'user',
+        'wheelchair',
+        'startDate',
+        'endDate',
+        'status',
       ]"
       :data="recentActivities"
       @add="$emit('add-rental')"
@@ -39,13 +39,14 @@
 <script setup lang="ts">
 import SummaryCard from "../dashboard/summary-card.vue";
 import DataTable from "../dashboard/data-table.vue";
-
+import type { Component } from 'vue';
+import { User , ShipWheel, ActivitySquare,AccessibilityIcon } from 'lucide-vue-next';
 interface SummaryCard {
   title: string;
   value: string;
   trend: "up" | "down";
   percentage: string;
-  icon: string;
+  icon: Component;
   bgColor: string;
 }
 
@@ -58,13 +59,14 @@ interface RecentActivity {
   status: string;
 }
 
+
 const summaryCards: SummaryCard[] = [
   {
     title: "Total Users",
     value: "1,248",
     trend: "up",
     percentage: "12",
-    icon: "UsersIcon",
+    icon: User, // langsung component-nya
     bgColor: "bg-blue-500",
   },
   {
@@ -72,7 +74,7 @@ const summaryCards: SummaryCard[] = [
     value: "342",
     trend: "up",
     percentage: "8",
-    icon: "WheelchairIcon",
+    icon: ShipWheel,
     bgColor: "bg-green-500",
   },
   {
@@ -80,7 +82,7 @@ const summaryCards: SummaryCard[] = [
     value: "156",
     trend: "up",
     percentage: "24",
-    icon: "ClipboardIcon",
+    icon: ActivitySquare,
     bgColor: "bg-purple-500",
   },
   {
@@ -88,10 +90,11 @@ const summaryCards: SummaryCard[] = [
     value: "186",
     trend: "down",
     percentage: "5",
-    icon: "WheelchairIcon",
+    icon: AccessibilityIcon,
     bgColor: "bg-orange-500",
   },
 ];
+
 
 const recentActivities: RecentActivity[] = [
   {

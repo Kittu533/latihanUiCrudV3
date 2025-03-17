@@ -17,8 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import * as icons from "../components/icon/index";
+import * as icons from "../components/icon";
 
 interface NavigationItem {
   id: string;
@@ -26,16 +25,17 @@ interface NavigationItem {
   icon: string;
 }
 
-const props = defineProps<{
+const _props = defineProps<{
   item: NavigationItem;
   active: boolean;
 }>();
 
-const emit = defineEmits<{
+const _emit = defineEmits<{
   (e: "click"): void;
 }>();
 
 const resolveIcon = (iconName: string) => {
-  return icons[iconName] || icons.HomeIcon;
-};
+  return (icons as Record<string, any>)[iconName] || icons.HomeIcon
+}
+
 </script>

@@ -1,4 +1,4 @@
-import { provide, inject, Ref } from 'vue';
+import { provide, inject } from 'vue';
 
 interface Toast {
   show: boolean;

@@ -7,9 +7,7 @@
         : 'flex flex-col items-center flex-wrap'
     "
   >
-    <div :class="iconContainerClass">
-      <BaseIcon :name="icon" />
-    </div>
+    <component :is="iconComponent" class="w-6 h-6 text-blue-600" />
     <div :class="textContainerClass">
       <h3 class="font-semibold text-[18px] mb-1">{{ title }}</h3>
       <p class="text-sm text-gray-500">{{ description }}</p>
@@ -18,13 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "../base-icon.vue";
+
 
 const props = defineProps<{
   icon: string;
   title: string;
   description: string;
   horizontal?: boolean;
+  iconComponent: Object;
 }>();
 
 const iconContainerClass = computed(() =>

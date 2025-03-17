@@ -3,7 +3,7 @@
     <h2 class="mb-4 text-2xl font-bold">Rental Management</h2>
 
     <DataTable
-      :columns="rentalColumns"
+      :columns="['id', 'user', 'wheelchair', 'startDate', 'endDate', 'status']"
       :data="rentals"
       title="Rental Records"
       itemName="Rental"
@@ -22,9 +22,8 @@
     />
   </div>
 </template>
-
 <script setup lang="ts">
-import { ref } from "vue";
+import type { Ref } from "vue";
 import DataTable from "../dashboard/data-table.vue";
 import FormModal from "../dashboard/form-modal.vue";
 import { useToast } from "../../composables/use-toast";
@@ -37,12 +36,26 @@ interface Rental {
   endDate: string;
   status: string;
 }
+const rentalColumns = [
+  "ID",
+  "User",
+  "Wheelchair",
+  "Start Date",
+  "End Date",
+  "Status",
+];
 
 interface FormData {
   user?: string;
   wheelchair?: string;
   startDate?: string;
   endDate?: string;
+  status?: string;
+}
+
+// Di file yang sama (paling gampang)
+interface DataItem {
+  [key: string]: any; // boleh sesuaikan
   status?: string;
 }
 
