@@ -15,10 +15,10 @@ import WheelchairsTable from "../../components/wheelchairs/wheelchairs-table.vue
 import RentalsTable from "../../components/rentals/rentals-table.vue";
 import { provideToast } from "../../composables/use-toast";
 
-
 definePageMeta({
   layout: false,
   title: "Admin Dashboard",
+
 });
 // Provide toast functionality
 provideToast();
@@ -32,7 +32,6 @@ provide("activeSection", activeSection);
 provide("setActiveSection", (section: string) => {
   activeSection.value = section;
 });
-
 
 // Determine which component to render based on active section
 const currentComponent = computed(() => {
