@@ -23,8 +23,8 @@
     </div>
 
     <form @submit.prevent="applyFilter" class="w-full">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="space-y-2">
+      <div class="flex justify-between gap-[30px] flex-wrap flex-1 mx-auto"> 
+        <div class="space-y-2 flex-1">
           <label for="periode" class="text-sm font-medium"
             >Periode Tanggal</label
           >
@@ -33,16 +33,16 @@
             type="date"
             placeholder="Tanggal"
             v-model="localFilter.date"
-            class="w-full px-3 py-2 border rounded-md"
+            class="w-full px-3 py-1 border rounded-md"
           />
         </div>
 
-        <div class="space-y-2">
+        <div class="space-y-2 flex-1">
           <label for="status" class="text-sm font-medium">Pilih Status</label>
           <select
             id="status"
             v-model="localFilter.status"
-            class="w-full px-3 py-2 border rounded-md"
+            class="w-full px-3 py-1 border rounded-md"
           >
             <option value="">Status</option>
             <option value="menunggu">Menunggu</option>
@@ -51,22 +51,21 @@
             <option value="nonaktif">Nonaktif</option>
           </select>
         </div>
-      </div>
-
-      <div class="flex justify-end mt-4 gap-2">
-        <button
-          class="bg-[#4072EE] text-white px-4 py-2 rounded-md hover:bg-[#3060DD]"
-          type="submit"
-        >
-          Terapkan
-        </button>
-        <button
-          class="border border-red-500 text-red-500 px-4 py-2 rounded-md hover:bg-red-50"
-          type="button"
-          @click="$emit('reset')"
-        >
-          Batal
-        </button>
+        <div class="flex justify-end items-end gap-[30px]">
+          <button
+            class="bg-[#4072EE] w-[115px] h-[34px] text-white p-[5px 10px 5px 10px] font-normal rounded-[5px] hover:bg-[#3060DD]"
+            type="submit"
+          >
+            Terapkan
+          </button>
+          <button
+            class="border border-red-500 text-red-500 w-[95px] h-[34px] p-[5px 10px 5px 10px] font-normal rounded-[5px] hover:bg-red-50"
+            type="button"
+            @click="$emit('reset')"
+          >
+            Batal
+          </button>
+        </div>
       </div>
     </form>
   </div>

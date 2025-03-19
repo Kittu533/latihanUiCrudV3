@@ -21,12 +21,19 @@ import { ref } from "vue";
 
 const isSidebarOpen = ref(true);
 const user = ref({
-  name: "Administrator",
+  name: "Selamat Datang",
   role: "Administrator",
-  avatar: "/Audi.webp",
+  avatar: "/avatar.webp",
 });
 
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
 </script>
+
+<style>
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+</style>

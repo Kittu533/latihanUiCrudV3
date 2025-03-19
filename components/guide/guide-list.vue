@@ -6,7 +6,7 @@
       </div>
       <div class="flex items-center gap-2">
         <button
-          class="bg-white border px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-50"
+          class="bg-white border px-[10px] py-[10px] rounded-[10px] w-[97px] h-[39px] flex items-center gap-2 hover:bg-gray-50"
         >
           <span>Cetak</span>
           <svg
@@ -25,7 +25,7 @@
           </svg>
         </button>
         <button
-          class="bg-white border px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-50"
+          class="bg-white border px-[10px] py-[10px] rounded-[10px] w-[97px] h-[39px] flex items-center gap-2 hover:bg-gray-50"
           @click="showFilter = !showFilter"
         >
           <svg
