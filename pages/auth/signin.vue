@@ -5,6 +5,7 @@ const router = useRouter()
 // const { showToast } = useToast()
 definePageMeta({
   title: 'Sign In',
+  layout: false
   
 })
 

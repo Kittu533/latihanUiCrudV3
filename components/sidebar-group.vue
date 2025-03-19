@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-// Definisikan props sekali saja
+// Define props
 const props = defineProps<{
   title?: string;
   isOpen?: boolean;
@@ -25,3 +25,4 @@ const props = defineProps<{
 const resolvedTitle = computed(() => props.title || '');
 const isOpen = computed(() => props.isOpen ?? true);
 </script>
+

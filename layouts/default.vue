@@ -21,7 +21,7 @@ import { ref } from "vue";
 
 const isSidebarOpen = ref(true);
 const user = ref({
-  name: "Selamat Datang",
+  name: "Administrator",
   role: "Administrator",
   avatar: "/Audi.webp",
 });

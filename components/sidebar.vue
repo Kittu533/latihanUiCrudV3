@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sidebar border-r bg-card text-card-foreground transition-all duration-300"
+    class="sidebar bg-card text-card-foreground transition-all duration-300"
     :class="{ 'w-64': isOpen, 'w-16': !isOpen }"
   >
     <!-- Logo -->
@@ -9,7 +9,7 @@
         <div
           class="flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-white"
         >
-          <CircleIcon class="h-4 w-4" />
+          <img src="/logo-monitoring.webp" class="w-8 h-8" alt="Logo" />
         </div>
         <span class="font-semibold" v-show="isOpen">Wheel Care</span>
       </div>
@@ -18,32 +18,48 @@
     <!-- Navigation -->
     <div class="py-4">
       <nav class="space-y-1 px-2">
-        
-        <SidebarGroup
-          v-for="(group, index) in navigation"
-          :key="index"
-          :title="group.title"
-          :is-open="isOpen"
+        <h1
+          class="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider"
         >
-          <SidebarItem class="hover:bg-muted/50 pl-8 " 
-            v-for="item in group.items"
-            :key="item.name"
-            :item="item"
-            :is-sidebar-open="isOpen"
-            :active="currentPath === item.href"
-            @click="navigateTo(item.href)"
-          />
-        </SidebarGroup>
+          Beranda
+        </h1>
+        <div v-for="(group, index) in navigation" :key="index">
+          <h2
+            v-if="isOpen"
+            class="mt-4 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+          >
+            {{ group.title }}
+          </h2>
+          <div class="mt-1 space-y-1">
+            <router-link
+              v-for="item in group.items"
+              :key="item.name"
+              :to="item.href"
+              class="group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors"
+              :class="[
+                isRouteActive(item.href)
+                  ? 'bg-accent text-accent-foreground font-semibold'
+                  : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+              ]"
+            >
+              <component
+                :is="item.icon"
+                class="mr-2 h-4 w-4 flex-shrink-0"
+                v-if="item.icon"
+              />
+              <span v-if="isOpen">{{ item.name }}</span>
+            </router-link>
+          </div>
+        </div>
       </nav>
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import {
-  CircleIcon,
-  HomeIcon,
   UsersIcon,
   PackageIcon,
   ShoppingCartIcon,
@@ -54,7 +70,7 @@ import {
 interface NavigationItem {
   name: string;
   href: string;
-  icon: any; // Consider using a more specific type for icons
+  icon?: any; // Optional icon property
 }
 
 interface NavigationGroup {
@@ -62,44 +78,42 @@ interface NavigationGroup {
   items: NavigationItem[];
 }
 
-defineProps<{
+const props = defineProps<{
   isOpen: boolean;
 }>();
 
 const route = useRoute();
 const currentPath = computed(() => route.path);
 
+// Helper function to check if a route is active (including child routes)
+const isRouteActive = (path: string): boolean => {
+  return currentPath.value === path || currentPath.value.startsWith(`${path}/`);
+};
+
 const navigation: NavigationGroup[] = [
-  // {
-  //   title: "",
-  //   items: [{ name: "Beranda", href: "/", icon: HomeIcon }],
-  // },
   {
     title: "Pengguna",
     items: [
-      { name: "Pengguna", href: "/pengguna", icon: UsersIcon },
-      { name: "Pelanggan", href: "/pengguna/pelanggan", icon: UsersIcon },
-      { name: "Guide", href: "/pengguna/guide", icon: FileTextIcon },
-      { name: "Agen", href: "/pengguna/agen", icon: UsersIcon },
+      { name: "Customer", href: "/admin/pengguna/pelanggan", icon: UsersIcon },
+      { name: "Guide", href: "/admin/pengguna/guide", icon: FileTextIcon },
+      { name: "Agent", href: "/admin/pengguna/agent", icon: UsersIcon },
     ],
   },
   {
     title: "Produk & Transaksi",
     items: [
-      { name: "Produk", href: "/produk", icon: PackageIcon },
-      { name: "Transaksi", href: "/transaksi", icon: ShoppingCartIcon },
-      { name: "Pengembalian", href: "/pengembalian", icon: ArrowLeftRightIcon },
+      { name: "Produk", href: "/admin/produk", icon: PackageIcon },
+      { name: "Transaksi", href: "/admin/transaksi", icon: ShoppingCartIcon },
+      {
+        name: "Pengembalian",
+        href: "/admin/pengembalian",
+        icon: ArrowLeftRightIcon,
+      },
     ],
   },
   {
     title: "Laporan",
-    items: [{ name: "Laporan", href: "/laporan", icon: FileTextIcon }],
+    items: [{ name: "Laporan", href: "/admin/laporan", icon: FileTextIcon }],
   },
 ];
-
-const navigateTo = (path: string): void => {
-  // In a real Nuxt app, you would use the navigateTo utility
-  // This is a placeholder for demonstration
-  console.log("Navigate to:", path);
-};
 </script>

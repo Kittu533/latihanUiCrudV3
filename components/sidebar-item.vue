@@ -1,11 +1,10 @@
 <template>
-  <a
-    href="#"
-    @click.prevent="$emit('click')"
+  <router-link
+    :to="item.href"
     class="group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors"
     :class="[
       active
-        ? 'bg-accent text-accent-foreground'
+        ? 'bg-accent text-accent-foreground font-semibold'
         : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
     ]"
   >
@@ -15,7 +14,7 @@
       v-if="item.icon"
     />
     <span v-if="isSidebarOpen">{{ item.name }}</span>
-  </a>
+  </router-link>
 </template>
 
 <script setup lang="ts">
@@ -36,8 +35,5 @@ const props = withDefaults(defineProps<{
   active: false,
   isSidebarOpen: true
 });
-
-defineEmits<{
-  (e: 'click'): void;
-}>();
 </script>
+

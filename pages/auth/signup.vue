@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 // const { showToast } = useToast()
 
 definePageMeta({
-  title: 'Sign Up',
-  
-})
+  title: "Sign Up",
+  layout: false,
+});
 
 const handleSubmit = (formData: any) => {
-  console.log('Sign Up form submitted:', formData)
+  console.log("Sign Up form submitted:", formData);
 
   // Show success message
   // showToast({
@@ -18,10 +18,10 @@ const handleSubmit = (formData: any) => {
   //   message: 'Your account has been created! Please check your email to verify your account.',
   //   type: 'success'
   // })
-  
+
   // Redirect to sign in page
-  router.push('/auth/signin')
-}
+  router.push("/auth/signin");
+};
 </script>
 
 <template>

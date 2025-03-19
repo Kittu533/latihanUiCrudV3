@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- Search Input -->
-
-
     <!-- Table -->
     <div class="rounded-md border">
       <table class="w-full text-sm">
@@ -29,17 +26,49 @@
               :key="`${rowIndex}-${column.key}`"
               class="p-4 align-middle"
             >
+              <!-- Regular cell content -->
               <template v-if="column.render && column.key !== 'actions'">
                 <component
-                  :is="column.render(row[column.key]).component"
-                  :class="column.render(row[column.key]).class"
+                  :is="column.render(row[column.key], row).component"
+                  :class="column.render(row[column.key], row).class"
                 >
-                  {{ column.render(row[column.key]).text }}
+                  {{ column.render(row[column.key], row).text }}
                 </component>
               </template>
+              
+              <!-- Action buttons -->
               <template v-else-if="column.key === 'actions'">
-                <div v-html="column.render().slots.default"></div>
+                <div class="flex space-x-2">
+                  <!-- View button -->
+                  <button 
+                    @click="$emit('action', { type: 'view', row })"
+                    class="p-1 text-blue-600 hover:text-blue-800"
+                  >
+                    <span class="sr-only">View</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                  
+                  <!-- Edit button -->
+                  <button 
+                    @click="$emit('action', { type: 'edit', row })"
+                    class="p-1 text-yellow-600 hover:text-yellow-800"
+                  >
+                    <span class="sr-only">Edit</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                  </button>
+                  
+                  <!-- Delete button -->
+                  <button 
+                    @click="$emit('action', { type: 'delete', row })"
+                    class="p-1 text-red-600 hover:text-red-800"
+                  >
+                    <span class="sr-only">Delete</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                  </button>
+                </div>
               </template>
+              
+              <!-- Default cell content -->
               <template v-else>
                 {{ row[column.key] }}
               </template>
@@ -101,7 +130,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 interface ColumnRenderResult {
   component: string;
@@ -114,7 +142,7 @@ interface Column {
   key: string;
   label: string;
   class?: string;
-  render?: (value: unknown) => ColumnRenderResult;
+  render?: (value: unknown, row?: unknown) => ColumnRenderResult;
 }
 
 interface DataItem {
@@ -137,6 +165,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'page-change', page: number): void;
   (e: 'search', query: string): void;
+  (e: 'action', payload: { type: string, row: DataItem }): void;
 }>();
 
 const searchQuery = ref<string>('');
@@ -169,11 +198,6 @@ const paginationPages = computed((): number[] => {
 
   return pages;
 });
-
-// Methods
-const handleSearch = (): void => {
-  emit('search', searchQuery.value);
-};
 
 const handlePrevPage = (): void => {
   if (props.pagination.currentPage > 1) {
