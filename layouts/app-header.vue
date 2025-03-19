@@ -34,6 +34,5 @@
 </template>
 
 <script setup lang="ts">
-
-import { MenuIcon,Search,Bell,User } from 'lucide-vue-next'
+import { MenuIcon, Search, Bell, User } from "lucide-vue-next";
 </script>
