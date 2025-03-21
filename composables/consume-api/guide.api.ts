@@ -6,7 +6,7 @@ import { useApiClient } from "../use-fetch-api"
 const mockGuides: Guide[] = [
   {
     id: "G0001",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Herman Prakoso",
     phone: "+6281234567890",
     ktp: "1234567890987654",
@@ -16,7 +16,7 @@ const mockGuides: Guide[] = [
   },
   {
     id: "G0002",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Nasisa Fadilla",
     phone: "+6281234567890",
     ktp: "1234567890987654",
@@ -26,7 +26,7 @@ const mockGuides: Guide[] = [
   },
   {
     id: "G0003",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Mia Anggreni",
     phone: "+6281234567890",
     ktp: "1234567890987654",
@@ -36,7 +36,7 @@ const mockGuides: Guide[] = [
   },
   {
     id: "G0004",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Finda Alifa",
     phone: "+6281234567890",
     ktp: "1234567890987654",
@@ -46,7 +46,7 @@ const mockGuides: Guide[] = [
   },
   {
     id: "G0005",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Ilham Dean",
     phone: "+6281234567890",
     ktp: "1234567890987654",

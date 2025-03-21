@@ -6,7 +6,7 @@ import { useApiClient } from "../use-fetch-api"
 const mockAgents: Agent[] = [
   {
     id: "A0001",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Herman Prakoso",
     phone: "+6281234567890",
     email: "hermanp@gmail.com",
@@ -23,7 +23,7 @@ const mockAgents: Agent[] = [
   },
   {
     id: "A0002",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Nasisa Fadilla",
     phone: "+6281234567890",
     email: "nasisa@gmail.com",
@@ -40,7 +40,7 @@ const mockAgents: Agent[] = [
   },
   {
     id: "A0003",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Mia Anggreni",
     phone: "+6281234567890",
     email: "mia@gmail.com",
@@ -57,7 +57,7 @@ const mockAgents: Agent[] = [
   },
   {
     id: "A0004",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Finda Alifa",
     phone: "+6281234567890",
     email: "finda@gmail.com",
@@ -74,7 +74,7 @@ const mockAgents: Agent[] = [
   },
   {
     id: "A0005",
-    photo: "/placeholder.svg?height=32&width=32",
+    photo: "/avatar.webp",
     name: "Ilham Dean",
     phone: "+6281234567890",
     email: "ilham@gmail.com",
