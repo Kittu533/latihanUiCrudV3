@@ -136,7 +136,7 @@ const columns = [
       };
       return {
         component: "span",
-        class: `px-2 py-1 rounded-md text-xs font-medium ${
+        class: `px-2 py-1 rounded-md text-xs font-medium ${ 
           statusClasses[value] || ""
         }`,
         text: value.charAt(0).toUpperCase() + value.slice(1),

@@ -2,32 +2,30 @@
   <div class="space-y-4">
     <div class="flex items-center justify-between">
       <div>
-        <h2 class="text-2xl font-bold tracking-tight">Produk</h2>
+        <h2 class="text-2xl font-bold tracking-tight">Product</h2>
       </div>
       <div class="flex items-center gap-2">
-        <div class="relative">
-          <button
-            class="bg-white border px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-50"
-          >
-            <span>Cetak</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-chevron-down"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </button>
-        </div>
         <button
-          class="bg-white border px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-50"
+          class="bg-white border px-[10px] py-[10px] rounded-[10px] w-[97px] h-[39px] flex items-center gap-2 hover:bg-gray-50"
+        >
+          <span>Cetak</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        <button
+          class="bg-white border px-[10px] py-[10px] rounded-[10px] w-[97px] h-[39px] flex items-center gap-2 hover:bg-gray-50"
           @click="showFilter = !showFilter"
         >
           <svg
@@ -45,27 +43,6 @@
             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
           </svg>
           <span>Filter</span>
-        </button>
-        <button
-          class="bg-[#4072EE] text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-[#3060DD]"
-          @click="router.push('/admin/product/new')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-plus"
-          >
-            <path d="M5 12h14" />
-            <path d="M12 5v14" />
-          </svg>
-          <span>Tambah Produk</span>
         </button>
       </div>
     </div>

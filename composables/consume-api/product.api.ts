@@ -63,6 +63,30 @@ const mockProducts: Product[] = [
     status: "tersedia",
     createdAt: "05/03/2025",
     updatedAt: "08/03/2025"
+  },
+  {
+    id: "PR0006",
+    agentId: "A0003",
+    serialNumber: "KR001",
+    productName: "Onemed AL 46",
+    model: "Elektrik",
+    weight: "300kg",
+    stock: 8,
+    status: "tersedia",
+    createdAt: "05/03/2025",
+    updatedAt: "08/03/2025"
+  },
+  {
+    id: "PR0007",
+    agentId: "A0003",
+    serialNumber: "KR001",
+    productName: "Onemed AL 46",
+    model: "Elektrik",
+    weight: "300kg",
+    stock: 8,
+    status: "tersedia",
+    createdAt: "05/03/2025",
+    updatedAt: "08/03/2025"
   }
 ]
 

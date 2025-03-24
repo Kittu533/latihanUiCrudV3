@@ -1,7 +1,7 @@
 <template>
   <div v-if="totalPages > 1" class="flex justify-between items-center mt-4">
     <div class="text-sm text-muted-foreground">
-      Showing {{ startItem }} to {{ endItem }} of {{ total }} entries
+        {{ startItem }} dari {{ endItem }} total ({{ total  }} data)
     </div>
 
     <div class="flex space-x-1">
