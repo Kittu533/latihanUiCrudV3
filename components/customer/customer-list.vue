@@ -4,28 +4,48 @@
       <div>
         <h2 class="text-2xl font-bold tracking-tight">Pelanggan</h2>
       </div>
-      <div class="flex items-center gap-2">
-        <button
-          class="flex items-center px-3 py-2 border rounded-md hover:bg-muted"
-          @click="showFilter = !showFilter"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-filter mr-2"
+      
+        <div class="flex items-center gap-2">
+          <button
+            class="bg-white border px-[10px] py-[10px] rounded-[10px] w-[97px] h-[39px] flex items-center gap-2 hover:bg-gray-50"
           >
-            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-          </svg>
-          Filter
-        </button>
-      </div>
+            <span>Cetak</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-down"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <button
+            class="bg-white border px-[10px] py-[10px] rounded-[10px] w-[97px] h-[39px] flex items-center gap-2 hover:bg-gray-50"
+            @click="showFilter = !showFilter"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-filter"
+            >
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+            </svg>
+            <span>Filter</span>
+          </button>
+        </div>
     </div>
 
     <!-- Filter Panel -->

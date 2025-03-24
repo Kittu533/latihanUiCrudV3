@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sidebar bg-card text-card-foreground transition-all duration-300"
+    class="sidebar bg-white border-r text-card-foreground transition-all duration-300 h-screen"
     :class="{ 'w-64': isOpen, 'w-16': !isOpen }"
   >
     <!-- Logo -->
@@ -16,17 +16,12 @@
     </div>
 
     <!-- Navigation -->
-    <div class="py-4">
-      <nav class="space-y-1 px-2">
-        <h1
-          class="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider"
-        >
-          Beranda
-        </h1>
-        <div v-for="(group, index) in navigation" :key="index">
+    <div class="py-4 overflow-y-auto">
+      <nav class="space-y-1 px-2 flex flex-col gap-6">
+        <div class="" v-for="(group, index) in navigation" :key="index">
           <h2
             v-if="isOpen"
-            class="mt-4 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+            class="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider"
           >
             {{ group.title }}
           </h2>
@@ -44,7 +39,8 @@
             >
               <component
                 :is="item.icon"
-                class="mr-2 h-4 w-4 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0"
+                :class="{ 'mr-3': isOpen }"
                 v-if="item.icon"
               />
               <span v-if="isOpen">{{ item.name }}</span>
@@ -53,6 +49,20 @@
         </div>
       </nav>
     </div>
+    
+    <!-- Toggle button (optional) -->
+    <div v-if="showToggle" class="border-t py-3 px-4">
+      <button 
+        @click="$emit('toggle')" 
+        class="flex items-center justify-center w-full rounded-md py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+      >
+        <component 
+          :is="isOpen ? 'ChevronLeftIcon' : 'ChevronRightIcon'" 
+          class="h-5 w-5" 
+        />
+        <span v-if="isOpen" class="ml-2">Collapse</span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -60,11 +70,14 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import {
+  HomeIcon,
   UsersIcon,
   PackageIcon,
   ShoppingCartIcon,
   ArrowLeftRightIcon,
   FileTextIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from "lucide-vue-next";
 
 interface NavigationItem {
@@ -80,7 +93,10 @@ interface NavigationGroup {
 
 const props = defineProps<{
   isOpen: boolean;
+  showToggle?: boolean;
 }>();
+
+const emit = defineEmits(['toggle']);
 
 const route = useRoute();
 const currentPath = computed(() => route.path);
@@ -90,30 +106,53 @@ const isRouteActive = (path: string): boolean => {
   return currentPath.value === path || currentPath.value.startsWith(`${path}/`);
 };
 
+// Updated navigation to match the image
 const navigation: NavigationGroup[] = [
+  {
+    title: "Beranda",
+    items: [{ name: "Beranda", href: "/admin", icon: HomeIcon }],
+  },
   {
     title: "Pengguna",
     items: [
-      { name: "Customer", href: "/admin/pengguna/pelanggan", icon: UsersIcon },
+      { name: "Pelanggan", href: "/admin/pengguna/pelanggan", icon: UsersIcon },
       { name: "Guide", href: "/admin/pengguna/guide", icon: FileTextIcon },
-      { name: "Agent", href: "/admin/pengguna/agent", icon: UsersIcon },
+      { name: "Agen", href: "/admin/pengguna/agent", icon: UsersIcon },
     ],
   },
   {
-    title: "Produk & Transaksi",
+    title: "Produk",
     items: [
-      { name: "Produk", href: "/admin/produk", icon: PackageIcon },
-      { name: "Transaksi", href: "/admin/transaksi", icon: ShoppingCartIcon },
-      {
-        name: "Pengembalian",
-        href: "/admin/pengembalian",
-        icon: ArrowLeftRightIcon,
-      },
+      { name: "Produk", href: "/admin/product", icon: PackageIcon },
     ],
+  },
+  {
+    title: "Transaksi",
+    items: [
+      { name: "Pemesanan", href: "/admin/transaction/booking", icon: ShoppingCartIcon },
+      { name: "Penarikan", href: "/admin/transaction/withdraw", icon: ArrowLeftRightIcon },
+    ],
+  },
+  {
+    title: "Pengembalian",
+    items: [{ name: "Pengembalian", href: "/admin/return", icon: ArrowLeftRightIcon }],
   },
   {
     title: "Laporan",
-    items: [{ name: "Laporan", href: "/admin/laporan", icon: FileTextIcon }],
+    items: [{ name: "Laporan", href: "/admin/report", icon: FileTextIcon }],
   },
 ];
 </script>
+
+<style scoped>
+.sidebar {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transitions for all elements */
+.sidebar * {
+  transition-property: width, opacity, margin, padding;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
+</style>
