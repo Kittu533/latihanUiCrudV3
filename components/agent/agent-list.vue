@@ -88,6 +88,7 @@
           :columns="columns"
           :loading="isLoading"
           @action="handleAction"
+          :rows-per-page="10"
         />
 
         <UiPagination
