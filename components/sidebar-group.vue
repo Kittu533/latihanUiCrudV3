@@ -2,7 +2,8 @@
   <div class="space-y-1">
     <h3
       v-if="resolvedTitle && isOpen"
-      class="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+      class="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider transition-opacity"
+      :class="{ 'opacity-0': !isOpen }"
     >
       {{ resolvedTitle }}
     </h3>
@@ -25,4 +26,3 @@ const props = defineProps<{
 const resolvedTitle = computed(() => props.title || '');
 const isOpen = computed(() => props.isOpen ?? true);
 </script>
-

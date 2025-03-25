@@ -6,14 +6,22 @@
       active
         ? 'bg-accent text-accent-foreground font-semibold'
         : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+      isSidebarOpen ? '' : 'justify-center'
     ]"
   >
     <component
       :is="item.icon"
-      class="mr-2 h-4 w-4 flex-shrink-0"
+      class="h-4 w-4 flex-shrink-0"
+      :class="{ 'mr-2': isSidebarOpen }"
       v-if="item.icon"
     />
-    <span v-if="isSidebarOpen">{{ item.name }}</span>
+    <span 
+      v-if="isSidebarOpen" 
+      class="truncate transition-opacity"
+    >
+      {{ item.name }}
+    </span>
+    <span v-else class="sr-only">{{ item.name }}</span>
   </router-link>
 </template>
 
@@ -36,4 +44,3 @@ const props = withDefaults(defineProps<{
   isSidebarOpen: true
 });
 </script>
-
