@@ -72,6 +72,33 @@ export function useBookingApi() {
       createdAt: '05/03/2025',
       updatedAt: '05/03/2025'
     }
+    ,
+    {
+      id: 'T0006',
+      voucherId: 'V0005',
+      bookingId: 'B0005',
+      amount: 810000,
+      paymentMethod: 'CC',
+      paymentDetail: 'CIMB',
+      transactionDate: '05/03/2025',
+      transactionTime: '06:15',
+      status: 'tertunda',
+      createdAt: '05/03/2025',
+      updatedAt: '05/03/2025'
+    },
+    {
+      id: 'T0007',
+      voucherId: 'V0005',
+      bookingId: 'B0005',
+      amount: 810000,
+      paymentMethod: 'CC',
+      paymentDetail: 'CIMB',
+      transactionDate: '05/03/2025',
+      transactionTime: '06:15',
+      status: 'tertunda',
+      createdAt: '05/03/2025',
+      updatedAt: '05/03/2025'
+    }
   ]
 
   const getBookings = async (filter: TransactionFilter): Promise<{ data: BookingTransaction[], pagination: Pagination }> => {
