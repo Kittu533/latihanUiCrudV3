@@ -101,6 +101,23 @@
         />
       </div>
     </div>
+    
+    <!-- Confirmation Modals -->
+    <ConfirmationModal
+      v-model:isOpen="isDeleteModalOpen"
+      type="delete"
+      :message="`Apakah anda yakin menghapus data ${selectedAgent?.name || ''}?`"
+      @confirm="confirmDelete"
+      @cancel="isDeleteModalOpen = false"
+    />
+    
+    <ConfirmationModal
+      v-model:isOpen="isSuccessModalOpen"
+      type="success"
+      message="Data agen berhasil dihapus"
+      :showButtons="false"
+      @cancel="isSuccessModalOpen = false"
+    />
   </div>
 </template>
 
@@ -113,6 +130,7 @@ import type { Agent } from "~/types/agent";
 import AgentFilter from "~/components/agent/agent-filter.vue";
 import UiTable from "~/components/ui/ui-table.vue";
 import UiPagination from "~/components/ui/ui-pagination.vue";
+import ConfirmationModal from "~/components/ui/modals/confirmation-modal.vue";
 
 // Router and stores
 const router = useRouter();
@@ -121,6 +139,9 @@ const notification = useNotification();
 
 // State
 const showFilter = ref(false);
+const isDeleteModalOpen = ref(false);
+const isSuccessModalOpen = ref(false);
+const selectedAgent = ref<Agent | null>(null);
 
 // Computed
 const agents = computed(() => agentStore.agents);
@@ -241,14 +262,32 @@ const handleAction = async ({ type, row }: { type: string; row: Agent }) => {
       await router.push(`/admin/pengguna/agent/${agent.id}/edit`);
       break;
     case "delete":
-      if (confirm(`Apakah anda yakin ingin menghapus ${agent.name}?`)) {
-        try {
-          await agentStore.deleteAgent(agent.id);
-        } catch (error) {
-          console.error("Error deleting agent:", error);
-        }
-      }
+      // Open delete confirmation modal instead of using browser confirm
+      selectedAgent.value = agent;
+      isDeleteModalOpen.value = true;
       break;
+  }
+};
+
+// Confirm delete handler
+const confirmDelete = async () => {
+  if (selectedAgent.value) {
+    try {
+      await agentStore.deleteAgent(selectedAgent.value.id);
+      isDeleteModalOpen.value = false;
+      
+      // Show success modal
+      isSuccessModalOpen.value = true;
+      
+      // Close success modal after 2 seconds
+      setTimeout(() => {
+        isSuccessModalOpen.value = false;
+      }, 2000);
+      
+    } catch (error) {
+      console.error("Error deleting agent:", error);
+      isDeleteModalOpen.value = false;
+    }
   }
 };
 

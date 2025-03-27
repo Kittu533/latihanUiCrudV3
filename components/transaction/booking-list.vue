@@ -79,39 +79,62 @@
         </div>
 
         <!-- Pagination -->
-        <div
-          v-if="pagination"
-          class="flex items-center justify-between mt-4 text-sm"
-        >
-          <div>
-            Halaman {{ pagination.currentPage }} dari
-            {{ pagination.totalPages }} ({{ pagination.total }} data)
+        <div v-if="pagination" class="flex items-center justify-between mt-4">
+          <div class="text-sm text-muted-foreground">
+            Halaman {{ pagination.currentPage }} dari {{ pagination.totalPages }} ({{ pagination.total }} data)
           </div>
-          <div class="flex items-center space-x-2">
+
+          <div class="flex space-x-1">
             <button
-              @click="handlePageChange(pagination.currentPage - 1)"
+              class="px-2 py-1 rounded-md text-sm border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
               :disabled="pagination.currentPage === 1"
-              class="px-2 py-1 border rounded-md disabled:opacity-50"
+              @click="handlePageChange(pagination.currentPage - 1)"
             >
-              <h1>Previous</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor" 
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4"
+              >
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
             </button>
+
             <button
               v-for="page in pagination.totalPages"
               :key="page"
+              class="px-3 py-1 rounded-md text-sm border bg-transparent hover:bg-muted"
+              :class="{ 'border-primary text-primary': page === pagination.currentPage }"
               @click="handlePageChange(page)"
-              class="px-3 py-1 border rounded-md"
-              :class="
-                page === pagination.currentPage ? 'bg-black text-white' : ''
-              "
             >
               {{ page }}
             </button>
+
             <button
-              @click="handlePageChange(pagination.currentPage + 1)"
+              class="px-2 py-1 rounded-md text-sm border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
               :disabled="pagination.currentPage === pagination.totalPages"
-              class="px-2 py-1 border rounded-md disabled:opacity-50"
+              @click="handlePageChange(pagination.currentPage + 1)"
             >
-              <h1>Next</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4"
+              >
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
             </button>
           </div>
         </div>
